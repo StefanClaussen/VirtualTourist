@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		F8AE55E21F161FD4005C8295 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AE55E11F161FD4005C8295 /* AppDelegate.swift */; };
-		F8AE55E41F161FD4005C8295 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AE55E31F161FD4005C8295 /* ViewController.swift */; };
 		F8AE55E71F161FD4005C8295 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8AE55E51F161FD4005C8295 /* Main.storyboard */; };
 		F8AE55E91F161FD4005C8295 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8AE55E81F161FD4005C8295 /* Assets.xcassets */; };
 		F8AE55EC1F161FD4005C8295 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8AE55EA1F161FD4005C8295 /* LaunchScreen.storyboard */; };
 		F8AE55F71F161FD4005C8295 /* VirtualTouristTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AE55F61F161FD4005C8295 /* VirtualTouristTests.swift */; };
 		F8AE56021F161FD4005C8295 /* VirtualTouristUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AE56011F161FD4005C8295 /* VirtualTouristUITests.swift */; };
+		F8AE56111F162128005C8295 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AE56101F162128005C8295 /* MapViewController.swift */; };
+		F8AE56151F1624D9005C8295 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8AE56141F1624D9005C8295 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +37,6 @@
 /* Begin PBXFileReference section */
 		F8AE55DE1F161FD4005C8295 /* VirtualTourist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtualTourist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8AE55E11F161FD4005C8295 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F8AE55E31F161FD4005C8295 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F8AE55E61F161FD4005C8295 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F8AE55E81F161FD4005C8295 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F8AE55EB1F161FD4005C8295 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +47,8 @@
 		F8AE55FD1F161FD4005C8295 /* VirtualTouristUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VirtualTouristUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8AE56011F161FD4005C8295 /* VirtualTouristUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualTouristUITests.swift; sourceTree = "<group>"; };
 		F8AE56031F161FD4005C8295 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F8AE56101F162128005C8295 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		F8AE56141F1624D9005C8295 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8AE56151F1624D9005C8295 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +84,7 @@
 				F8AE55F51F161FD4005C8295 /* VirtualTouristTests */,
 				F8AE56001F161FD4005C8295 /* VirtualTouristUITests */,
 				F8AE55DF1F161FD4005C8295 /* Products */,
+				F8AE56131F1624D9005C8295 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,11 +102,8 @@
 			isa = PBXGroup;
 			children = (
 				F8AE55E11F161FD4005C8295 /* AppDelegate.swift */,
-				F8AE55E31F161FD4005C8295 /* ViewController.swift */,
-				F8AE55E51F161FD4005C8295 /* Main.storyboard */,
-				F8AE55E81F161FD4005C8295 /* Assets.xcassets */,
-				F8AE55EA1F161FD4005C8295 /* LaunchScreen.storyboard */,
-				F8AE55ED1F161FD4005C8295 /* Info.plist */,
+				F8AE56121F162144005C8295 /* Controllers */,
+				F8AE560F1F162014005C8295 /* Assets */,
 			);
 			path = VirtualTourist;
 			sourceTree = "<group>";
@@ -123,6 +124,33 @@
 				F8AE56031F161FD4005C8295 /* Info.plist */,
 			);
 			path = VirtualTouristUITests;
+			sourceTree = "<group>";
+		};
+		F8AE560F1F162014005C8295 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				F8AE55E51F161FD4005C8295 /* Main.storyboard */,
+				F8AE55E81F161FD4005C8295 /* Assets.xcassets */,
+				F8AE55EA1F161FD4005C8295 /* LaunchScreen.storyboard */,
+				F8AE55ED1F161FD4005C8295 /* Info.plist */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		F8AE56121F162144005C8295 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F8AE56101F162128005C8295 /* MapViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		F8AE56131F1624D9005C8295 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F8AE56141F1624D9005C8295 /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,6 +223,11 @@
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = QJT4Q96V2B;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					F8AE55F11F161FD4005C8295 = {
 						CreatedOnToolsVersion = 8.3.3;
@@ -262,8 +295,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8AE55E41F161FD4005C8295 /* ViewController.swift in Sources */,
 				F8AE55E21F161FD4005C8295 /* AppDelegate.swift in Sources */,
+				F8AE56111F162128005C8295 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
