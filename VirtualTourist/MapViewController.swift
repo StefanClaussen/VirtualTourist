@@ -36,4 +36,18 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate, MKMapVie
         
         mapView.addAnnotation(annotation)
     }
+    
+    // MARK: - MapViewDelegate
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        performSegue(withIdentifier: "MapToDetail", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "MapToDetail", let viewController = segue.destination as? DetailViewController {
+            // pass the map coordinates
+        }
+    }
+    
+
 }

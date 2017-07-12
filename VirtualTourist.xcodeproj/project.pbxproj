@@ -15,6 +15,7 @@
 		F8AE56021F161FD4005C8295 /* VirtualTouristUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AE56011F161FD4005C8295 /* VirtualTouristUITests.swift */; };
 		F8AE56111F162128005C8295 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AE56101F162128005C8295 /* MapViewController.swift */; };
 		F8AE56151F1624D9005C8295 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8AE56141F1624D9005C8295 /* MapKit.framework */; };
+		F8AE56171F164856005C8295 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AE56161F164856005C8295 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		F8AE56031F161FD4005C8295 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F8AE56101F162128005C8295 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		F8AE56141F1624D9005C8295 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		F8AE56161F164856005C8295 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				F8AE56101F162128005C8295 /* MapViewController.swift */,
+				F8AE56161F164856005C8295 /* DetailViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8AE56171F164856005C8295 /* DetailViewController.swift in Sources */,
 				F8AE55E21F161FD4005C8295 /* AppDelegate.swift in Sources */,
 				F8AE56111F162128005C8295 /* MapViewController.swift in Sources */,
 			);
