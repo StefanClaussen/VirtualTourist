@@ -13,6 +13,8 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate, MKMapVie
 
     @IBOutlet weak var mapView: MKMapView!
     
+    private var locationCoordinate = CLLocationCoordinate2D()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,12 +42,15 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate, MKMapVie
     // MARK: - MapViewDelegate
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        guard let annotation = view.annotation else { return }
+        locationCoordinate = annotation.coordinate
+        
         performSegue(withIdentifier: "MapToDetail", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "MapToDetail", let viewController = segue.destination as? DetailViewController {
-            // pass the map coordinates
+            viewController.locationCoordinate = locationCoordinate
         }
     }
     
