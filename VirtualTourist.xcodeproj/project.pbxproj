@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F8A0F3671F17A52B00B00121 /* FlickrAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A0F3661F17A52B00B00121 /* FlickrAPI.swift */; };
+		F8A0F3691F17A55800B00121 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A0F3681F17A55800B00121 /* Constants.swift */; };
+		F8A0F36C1F17ADE400B00121 /* PhotoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A0F36B1F17ADE400B00121 /* PhotoStore.swift */; };
+		F8A0F36E1F17B0C300B00121 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A0F36D1F17B0C300B00121 /* Photo.swift */; };
 		F8AE55E21F161FD4005C8295 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AE55E11F161FD4005C8295 /* AppDelegate.swift */; };
 		F8AE55E71F161FD4005C8295 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8AE55E51F161FD4005C8295 /* Main.storyboard */; };
 		F8AE55E91F161FD4005C8295 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8AE55E81F161FD4005C8295 /* Assets.xcassets */; };
@@ -36,6 +40,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F8A0F3661F17A52B00B00121 /* FlickrAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrAPI.swift; sourceTree = "<group>"; };
+		F8A0F3681F17A55800B00121 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F8A0F36B1F17ADE400B00121 /* PhotoStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoStore.swift; sourceTree = "<group>"; };
+		F8A0F36D1F17B0C300B00121 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		F8AE55DE1F161FD4005C8295 /* VirtualTourist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtualTourist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8AE55E11F161FD4005C8295 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F8AE55E61F161FD4005C8295 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -79,6 +87,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F8A0F36A1F17A56000B00121 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F8A0F3681F17A55800B00121 /* Constants.swift */,
+				F8A0F3661F17A52B00B00121 /* FlickrAPI.swift */,
+				F8A0F36B1F17ADE400B00121 /* PhotoStore.swift */,
+				F8A0F36D1F17B0C300B00121 /* Photo.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		F8AE55D51F161FD4005C8295 = {
 			isa = PBXGroup;
 			children = (
@@ -106,6 +125,7 @@
 				F8AE55E11F161FD4005C8295 /* AppDelegate.swift */,
 				F8AE56121F162144005C8295 /* Controllers */,
 				F8AE560F1F162014005C8295 /* Assets */,
+				F8A0F36A1F17A56000B00121 /* Model */,
 			);
 			path = VirtualTourist;
 			sourceTree = "<group>";
@@ -298,9 +318,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8A0F36E1F17B0C300B00121 /* Photo.swift in Sources */,
+				F8A0F3691F17A55800B00121 /* Constants.swift in Sources */,
 				F8AE56171F164856005C8295 /* DetailViewController.swift in Sources */,
 				F8AE55E21F161FD4005C8295 /* AppDelegate.swift in Sources */,
 				F8AE56111F162128005C8295 /* MapViewController.swift in Sources */,
+				F8A0F36C1F17ADE400B00121 /* PhotoStore.swift in Sources */,
+				F8A0F3671F17A52B00B00121 /* FlickrAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -553,6 +577,7 @@
 				F8AE56081F161FD4005C8295 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F8AE56091F161FD4005C8295 /* Build configuration list for PBXNativeTarget "VirtualTouristTests" */ = {
 			isa = XCConfigurationList;
@@ -561,6 +586,7 @@
 				F8AE560B1F161FD4005C8295 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F8AE560C1F161FD4005C8295 /* Build configuration list for PBXNativeTarget "VirtualTouristUITests" */ = {
 			isa = XCConfigurationList;
@@ -569,6 +595,7 @@
 				F8AE560E1F161FD4005C8295 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
