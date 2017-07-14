@@ -12,12 +12,6 @@ enum FlickrError: Error {
     case invalidJSONData
 }
 
-private let dateFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-    return formatter
-}()
-
 struct FlickrAPI {
     
     static var searchURL: URL {
