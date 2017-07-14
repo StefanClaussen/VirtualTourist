@@ -123,9 +123,9 @@
 			isa = PBXGroup;
 			children = (
 				F8AE55E11F161FD4005C8295 /* AppDelegate.swift */,
+				F8A0F36A1F17A56000B00121 /* Model */,
 				F8AE56121F162144005C8295 /* Controllers */,
 				F8AE560F1F162014005C8295 /* Assets */,
-				F8A0F36A1F17A56000B00121 /* Model */,
 			);
 			path = VirtualTourist;
 			sourceTree = "<group>";
