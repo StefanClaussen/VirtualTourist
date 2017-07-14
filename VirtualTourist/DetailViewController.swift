@@ -25,7 +25,13 @@ class DetailViewController: UIViewController {
             switch result {
             case let .success(photos):
                 print("Photos count: \(photos.count)")
-                guard let photo = photos.first else { return }
+                guard
+                    let photo = photos.first,
+                    let imageURL = URL(string: photo.remoteURL),
+                    let imageData = try? Data(contentsOf: imageURL)
+                    else { return }
+                self.imageView.image = UIImage(data: imageData)
+                
             case let .failure(error):
                 print(error)
             }
