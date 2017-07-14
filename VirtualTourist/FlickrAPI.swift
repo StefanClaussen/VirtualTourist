@@ -32,25 +32,18 @@ struct FlickrAPI {
             return .failure(error)
         }
         
-        guard let photosDictionary = parsedResult[Constants.FlickrResponseKeys.Photos] as? [String: AnyObject] else {
-            return .failure(FlickrError.invalidJSONData)
-        }
-        
-        guard let photosArray = photosDictionary[Constants.FlickrResponseKeys.Photo] as? [[String:AnyObject]] else {
-            return .failure(FlickrError.invalidJSONData)
+        guard let photosDictionary = parsedResult[Constants.FlickrResponseKeys.Photos] as? [String: AnyObject],
+            let photosArray = photosDictionary[Constants.FlickrResponseKeys.Photo] as? [[String:AnyObject]] else {
+                return .failure(FlickrError.invalidJSONData)
         }
         
         var finalPhotos = [Photo]()
         for photoDictionary in photosArray {
-            guard
-                let photoTitle = photoDictionary[Constants.FlickrResponseKeys.Title] as? String,
-                let imageURLString = photoDictionary[Constants.FlickrResponseKeys.MediumURL] as? String,
-                let photo = Photo(title: photoTitle, remoteURL: imageURLString) else {
-                    return .failure(FlickrError.invalidJSONData)
+            guard let photo = Photo(fromJSON: photoDictionary) else {
+                return .failure(FlickrError.invalidJSONData)
             }
             finalPhotos.append(photo)
         }
-        
         return .success(finalPhotos)
     }
     

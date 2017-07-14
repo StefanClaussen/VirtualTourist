@@ -27,8 +27,8 @@ class DetailViewController: UIViewController {
                 print("Photos count: \(photos.count)")
                 guard
                     let photo = photos.first,
-                    let imageURL = URL(string: photo.remoteURL),
-                    let imageData = try? Data(contentsOf: imageURL)
+                    let photoURL = photo.url,
+                    let imageData = try? Data(contentsOf: photoURL)
                     else { return }
                 self.imageView.image = UIImage(data: imageData)
                 

@@ -10,18 +10,18 @@ import Foundation
 
 struct Photo {
 
-    let remoteURL: String
+    let url: URL?
     let title: String
     
-    init?(title: String, remoteURL: String) {
+    init?(fromJSON json: [String: Any]) {
+        guard
+            let title = json[Constants.FlickrResponseKeys.Title] as? String,
+            let urlString = json[Constants.FlickrResponseKeys.MediumURL] as? String
+            else {
+                return nil
+    }
         self.title = title
-        self.remoteURL = remoteURL
+        self.url = URL(string: urlString)
     }
 }
 
-//extension Photo: Equatable {
-//    static func == (lhs: Photo, rhs: Photo) -> Bool {
-//        // Two Photos are the same if they have the same photoID
-//        return lhs.photoID == rhs.photoID
-//    }
-//}
