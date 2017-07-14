@@ -68,7 +68,7 @@
                                 </constraints>
                             </mapView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9Nh-M0-Dwh">
-                                <rect key="frame" x="0.0" y="212" width="375" height="455"/>
+                                <rect key="frame" x="0.0" y="206" width="375" height="461"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="5FT-lx-beh">
                                     <size key="itemSize" width="90" height="90"/>
@@ -77,21 +77,41 @@
                                     <inset key="sectionInset" minX="2" minY="2" maxX="2" maxY="2"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UICollectionViewCell" id="1x1-En-YLp">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCollectionViewCell" id="1x1-En-YLp" customClass="PhotoCollectionViewCell" customModule="VirtualTourist" customModuleProvider="target">
                                         <rect key="frame" x="2" y="2" width="90" height="90"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="3NW-oU-PqJ">
+                                                    <rect key="frame" x="35" y="35" width="20" height="20"/>
+                                                </activityIndicatorView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W2Z-hV-rFb">
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                                </imageView>
+                                            </subviews>
                                         </view>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="W2Z-hV-rFb" secondAttribute="bottom" id="DIs-u6-92R"/>
+                                            <constraint firstItem="W2Z-hV-rFb" firstAttribute="leading" secondItem="1x1-En-YLp" secondAttribute="leading" id="hwV-qB-Ph2"/>
+                                            <constraint firstItem="3NW-oU-PqJ" firstAttribute="centerY" secondItem="W2Z-hV-rFb" secondAttribute="centerY" id="rKO-6g-9kg"/>
+                                            <constraint firstAttribute="trailing" secondItem="W2Z-hV-rFb" secondAttribute="trailing" id="v7l-cS-Kcw"/>
+                                            <constraint firstItem="W2Z-hV-rFb" firstAttribute="top" secondItem="1x1-En-YLp" secondAttribute="top" id="w56-Js-hLV"/>
+                                            <constraint firstItem="3NW-oU-PqJ" firstAttribute="centerX" secondItem="W2Z-hV-rFb" secondAttribute="centerX" id="zoa-FC-ebQ"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="imageView" destination="W2Z-hV-rFb" id="7Rh-s2-OLt"/>
+                                            <outlet property="spinner" destination="3NW-oU-PqJ" id="Blc-tC-Wxa"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="9Nh-M0-Dwh" firstAttribute="top" secondItem="ceb-7K-f1e" secondAttribute="bottom" constant="8" id="13H-c9-0fo"/>
+                            <constraint firstItem="9Nh-M0-Dwh" firstAttribute="top" secondItem="ceb-7K-f1e" secondAttribute="bottom" constant="2" id="13H-c9-0fo"/>
                             <constraint firstItem="yUx-Tx-zPE" firstAttribute="top" secondItem="9Nh-M0-Dwh" secondAttribute="bottom" id="JED-Kp-lc4"/>
                             <constraint firstItem="9Nh-M0-Dwh" firstAttribute="leading" secondItem="MoB-ov-zHK" secondAttribute="leadingMargin" constant="-16" id="WUX-x5-Mgs"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ceb-7K-f1e" secondAttribute="trailing" constant="-16" id="fWc-i2-EDw"/>
