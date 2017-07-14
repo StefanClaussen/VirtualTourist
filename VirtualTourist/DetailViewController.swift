@@ -11,30 +11,31 @@ import MapKit
 
 class DetailViewController: UIViewController {
     
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var imageView: UIImageView!
     
     var locationCoordinate = CLLocationCoordinate2D()
+    let photoDataSource = PhotoDataSource()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        collectionView.dataSource = photoDataSource
 
         addMapAnnotation()
         
-        PhotoStore.GETPhotosFromFlickr { (result) in
+        PhotoStore.GETPhotosFromFlickr { [weak self] (result) in
+            guard let strongSelf = self else { return }
             switch result {
             case let .success(photos):
                 print("Photos count: \(photos.count)")
-                guard
-                    let photo = photos.first,
-                    let photoURL = photo.url,
-                    let imageData = try? Data(contentsOf: photoURL)
-                    else { return }
-                self.imageView.image = UIImage(data: imageData)
+                strongSelf.photoDataSource.photos = photos
                 
             case let .failure(error):
-                print(error)
+                print("Error getting photos from Flickr: \(error)")
+                self?.photoDataSource.photos.removeAll()
             }
+            strongSelf.collectionView.reloadSections(IndexSet(integer: 0))
         }
     }
     
