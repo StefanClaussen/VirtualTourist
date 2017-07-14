@@ -12,6 +12,12 @@ enum FlickrError: Error {
     case invalidJSONData
 }
 
+private let dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    return formatter
+}()
+
 struct FlickrAPI {
     
     static var searchURL: URL {
@@ -30,7 +36,22 @@ struct FlickrAPI {
             return .failure(FlickrError.invalidJSONData)
         }
         
-        return .success([Photo()])
+        guard let photosArray = photosDictionary[Constants.FlickrResponseKeys.Photo] as? [[String:AnyObject]] else {
+            return .failure(FlickrError.invalidJSONData)
+        }
+        
+        var finalPhotos = [Photo]()
+        for photoDictionary in photosArray {
+            guard
+                let photoTitle = photoDictionary[Constants.FlickrResponseKeys.Title] as? String,
+                let imageURLString = photoDictionary[Constants.FlickrResponseKeys.MediumURL] as? String,
+                let photo = Photo(title: photoTitle, remoteURL: imageURLString) else {
+                    return .failure(FlickrError.invalidJSONData)
+            }
+            finalPhotos.append(photo)
+        }
+        
+        return .success(finalPhotos)
     }
     
     private static func flickrURL() -> URL {

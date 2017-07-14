@@ -12,6 +12,7 @@ import MapKit
 class DetailViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var imageView: UIImageView!
     
     var locationCoordinate = CLLocationCoordinate2D()
 
@@ -19,6 +20,16 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
 
         addMapAnnotation()
+        
+        PhotoStore.GETPhotosFromFlickr { (result) in
+            switch result {
+            case let .success(photos):
+                print("Photos count: \(photos.count)")
+                guard let photo = photos.first else { return }
+            case let .failure(error):
+                print(error)
+            }
+        }
     }
     
     private func addMapAnnotation() {

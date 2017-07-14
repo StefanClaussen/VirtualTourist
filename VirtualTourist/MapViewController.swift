@@ -19,15 +19,6 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate, MKMapVie
         super.viewDidLoad()
         
         configureLongPressGestureRecognizer()
-        
-        PhotoStore.GETPhotosFromFlickr { (result) in
-            switch result {
-            case let .success(photos):
-                print("Photos count: \(photos.count)")
-            case let .failure(error):
-                print(error)
-            }
-        }
     }
     
     func configureLongPressGestureRecognizer() {

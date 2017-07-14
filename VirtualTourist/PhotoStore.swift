@@ -18,7 +18,7 @@ enum PhotoStoreError: Error {
 }
 
 class PhotoStore {
-    
+    //Rename to fetchPhotosSearch maybe
     static func GETPhotosFromFlickr(completion: @escaping (Result<[Photo]>) -> Void) {
         let session = URLSession.shared
         let request = URLRequest(url: FlickrAPI.searchURL)
