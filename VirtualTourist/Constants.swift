@@ -62,6 +62,7 @@ struct Constants {
         static let MediumURL = "url_m"
         static let Pages = "pages"
         static let Total = "total"
+        static let PhotoID = "id"
     }
     
     // MARK: Flickr Response Values

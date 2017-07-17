@@ -15,16 +15,18 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     
     var locationCoordinate = CLLocationCoordinate2D()
+    var store: PhotoStore!
     let photoDataSource = PhotoDataSource()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView.dataSource = photoDataSource
+        collectionView.delegate = self
 
         addMapAnnotation()
         
-        PhotoStore.GETPhotosFromFlickr { [weak self] (result) in
+        store.GETPhotosFromFlickr { [weak self] (result) in
             guard let strongSelf = self else { return }
             switch result {
             case let .success(photos):
@@ -53,4 +55,23 @@ class DetailViewController: UIViewController {
         mapView.setRegion(coordinateRegion, animated: true)
     }
 
+}
+
+extension DetailViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let photo = photoDataSource.photos[indexPath.row]
+        
+        store.fetchImage(for: photo) { (result) -> Void in
+            guard let photoIndex = self.photoDataSource.photos.index(of: photo),
+                case let .success(image) = result else {
+                    return
+            }
+            let photoIndexPath = IndexPath(item: photoIndex, section: 0)
+            
+            if let cell = self.collectionView.cellForItem(at: photoIndexPath) as? PhotoCollectionViewCell {
+                cell.update(with: image)
+            }
+        }
+    }
 }

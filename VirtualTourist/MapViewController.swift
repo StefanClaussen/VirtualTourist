@@ -14,6 +14,7 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate, MKMapVie
     @IBOutlet weak var mapView: MKMapView!
     
     private var locationCoordinate = CLLocationCoordinate2D()
+    var store: PhotoStore!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,8 +52,8 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate, MKMapVie
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "MapToDetail", let viewController = segue.destination as? DetailViewController {
             viewController.locationCoordinate = locationCoordinate
+            viewController.store = store
         }
     }
     
-
 }
