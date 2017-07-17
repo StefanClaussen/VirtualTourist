@@ -24,6 +24,7 @@
 		F8AE56111F162128005C8295 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AE56101F162128005C8295 /* MapViewController.swift */; };
 		F8AE56151F1624D9005C8295 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8AE56141F1624D9005C8295 /* MapKit.framework */; };
 		F8AE56171F164856005C8295 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AE56161F164856005C8295 /* DetailViewController.swift */; };
+		F8CE24711F1D1C2B00153ED0 /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CE24701F1D1C2B00153ED0 /* ImageStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		F8AE56101F162128005C8295 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		F8AE56141F1624D9005C8295 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		F8AE56161F164856005C8295 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		F8CE24701F1D1C2B00153ED0 /* ImageStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				F8A5CC641F1D0CC300F0A33B /* Photo+CoreDataProperties.swift */,
 				F8A0F3711F18D75200B00121 /* PhotoDataSource.swift */,
 				F8A0F36B1F17ADE400B00121 /* PhotoStore.swift */,
+				F8CE24701F1D1C2B00153ED0 /* ImageStore.swift */,
 				F81AB4601F1D083B008E1930 /* VirtualTourist.xcdatamodeld */,
 			);
 			name = Model;
@@ -349,6 +352,7 @@
 				F8A5CC661F1D0CC300F0A33B /* Photo+CoreDataProperties.swift in Sources */,
 				F8A0F36C1F17ADE400B00121 /* PhotoStore.swift in Sources */,
 				F8A0F3671F17A52B00B00121 /* FlickrAPI.swift in Sources */,
+				F8CE24711F1D1C2B00153ED0 /* ImageStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

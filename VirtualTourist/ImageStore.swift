@@ -1,9 +1,5 @@
 //
-//  PhotoDataSource.swift
-//  VirtualTourist
-//
-//  Created by Stefan Claussen on 14/07/2017.
-//  Copyright © 2017 One foot after the other. All rights reserved.
+//  Copyright © 2015 Big Nerd Ranch
 //
 
 import UIKit
