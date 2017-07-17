@@ -22,10 +22,10 @@ class PhotoDataSource: NSObject, UICollectionViewDataSource {
         
         // TODO: adding images for a cell is slow. 
         // This needs improving. Also no spinner happens whilst the images are being fetched. 
-//        let photo = photos[indexPath.row]
-//        if let imageData = try? Data(contentsOf: photo.remoteURL) {
-//            cell.imageView.image = UIImage(data: imageData)
-//        }
+        let photo = photos[indexPath.row]
+        if let imageData = try? Data(contentsOf: photo.remoteURL) {
+            cell.imageView.image = UIImage(data: imageData)
+        }
         
         return cell
     }
