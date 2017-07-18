@@ -47,9 +47,16 @@ class PhotoStore {
         
         //TODO: add strong and weak self
         let task = session.dataTask(with: request) { (data, response, error) in
-            let results = self.processPhotosRequest(data: data, error: error)
+            var result = self.processPhotosRequest(data: data, error: error)
+            if case .success = result {
+                do {
+                    try self.persistantContainer.viewContext.save()
+                } catch let error {
+                    result = .failure(error)
+                }
+            }
             OperationQueue.main.addOperation {
-                completion(results)
+                completion(result)
             }
         }
         task.resume()
@@ -59,7 +66,7 @@ class PhotoStore {
         guard let jsonData = data else {
             return .failure(error ?? PhotoStoreError.unknown)
         }
-        return FlickrAPI.photos(fromJSON: jsonData)
+        return FlickrAPI.photos(fromJSON: jsonData, into: persistantContainer.viewContext)
     }
     
     func fetchImage(for photo: Photo, completion: @escaping (Result<UIImage>) -> Void) {
@@ -94,5 +101,21 @@ class PhotoStore {
             }
         }
         return .success(image)
+    }
+    
+    func fetchAllPhotos(completion: @escaping (Result<[Photo]>) -> Void) {
+        let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
+        let sortByDateTaken = NSSortDescriptor(key: #keyPath(Photo.dateTaken), ascending: true)
+        fetchRequest.sortDescriptors = [sortByDateTaken]
+        
+        let viewContext = persistantContainer.viewContext
+        viewContext.perform {
+            do {
+                let allPhotos = try viewContext.fetch(fetchRequest)
+                completion(.success(allPhotos))
+            } catch {
+                completion(.failure(error))
+            }
+        }
     }
 }

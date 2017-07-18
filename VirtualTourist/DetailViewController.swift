@@ -23,21 +23,15 @@ class DetailViewController: UIViewController {
         
         collectionView.dataSource = photoDataSource
         collectionView.delegate = self
+        
+        updateDataSource()
 
         addMapAnnotation()
         
         store.GETPhotosFromFlickr { [weak self] (result) in
             guard let strongSelf = self else { return }
-            switch result {
-            case let .success(photos):
-                print("Photos count: \(photos.count)")
-                strongSelf.photoDataSource.photos = photos
-                
-            case let .failure(error):
-                print("Error getting photos from Flickr: \(error)")
-                self?.photoDataSource.photos.removeAll()
-            }
-            strongSelf.collectionView.reloadSections(IndexSet(integer: 0))
+            
+            strongSelf.updateDataSource()
         }
     }
     
@@ -53,6 +47,18 @@ class DetailViewController: UIViewController {
         let metres: CLLocationDistance = 5000
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(coordinate, metres, metres)
         mapView.setRegion(coordinateRegion, animated: true)
+    }
+    
+    private func updateDataSource() {
+        store.fetchAllPhotos { (photosResult) in
+            switch photosResult {
+            case let .success(photos):
+                self.photoDataSource.photos = photos
+            case .failure:
+                self.photoDataSource.photos.removeAll()
+            }
+            self.collectionView.reloadSections(IndexSet(integer: 0))
+        }
     }
 
 }

@@ -19,7 +19,13 @@ struct FlickrAPI {
         return flickrURL()
     }
     
-    static func photos(fromJSON data: Data) -> Result<[Photo]> {
+    private static let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return formatter
+    }()
+    
+    static func photos(fromJSON data: Data, into context: NSManagedObjectContext) -> Result<[Photo]> {
         let parsedResult: [String: AnyObject]
         do {
             parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
@@ -34,7 +40,7 @@ struct FlickrAPI {
         
         var finalPhotos = [Photo]()
         for photoDictionary in photosArray {
-            guard let photo = Photo(fromJSON: photoDictionary) else {
+            guard let photo = photo(fromJSON: photoDictionary, into: context) else {
                 return .failure(FlickrError.invalidJSONData)
             }
             finalPhotos.append(photo)
@@ -42,8 +48,38 @@ struct FlickrAPI {
         return .success(finalPhotos)
     }
     
-    private static func photo(fromJSON json: [String: Any], intoContext: NSManagedObjectContext) -> Photo? {
+    private static func photo(fromJSON json: [String: Any], into context: NSManagedObjectContext) -> Photo? {
+        guard
+            let title = json[Constants.FlickrResponseKeys.Title] as? String,
+            let urlString = json[Constants.FlickrResponseKeys.MediumURL] as? String,
+            let url = URL(string: urlString),
+            let photoID = json[Constants.FlickrResponseKeys.PhotoID] as? String,
+            let dateString = json["datetaken"] as? String,
+            let dateTaken = dateFormatter.date(from: dateString) else {
+                return nil
+        }
         
+        let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
+        let predicate = NSPredicate(format: "\(#keyPath(Photo.photoID)) == \(photoID)")
+        fetchRequest.predicate = predicate
+        
+        var fetchedPhotos: [Photo]?
+        context.performAndWait {
+            fetchedPhotos = try? fetchRequest.execute()
+        }
+        if let existingPhoto = fetchedPhotos?.first {
+            return existingPhoto
+        }
+        
+        var photo: Photo!
+        context.performAndWait {
+            photo = Photo(context: context)
+            photo.title = title
+            photo.photoID = photoID
+            photo.remoteURL = url as NSURL
+            photo.dateTaken = dateTaken as NSDate 
+        }
+        return photo
     }
     
     private static func flickrURL() -> URL {

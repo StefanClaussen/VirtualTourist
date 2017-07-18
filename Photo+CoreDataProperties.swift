@@ -2,7 +2,7 @@
 //  Photo+CoreDataProperties.swift
 //  VirtualTourist
 //
-//  Created by Stefan Claussen on 17/07/2017.
+//  Created by Stefan Claussen on 18/07/2017.
 //  Copyright © 2017 One foot after the other. All rights reserved.
 //
 
@@ -19,5 +19,6 @@ extension Photo {
     @NSManaged public var photoID: String?
     @NSManaged public var remoteURL: NSURL?
     @NSManaged public var title: String?
+    @NSManaged public var dateTaken: NSDate?
 
 }
