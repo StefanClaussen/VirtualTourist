@@ -14,14 +14,15 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var mapView: MKMapView!
     
+    fileprivate let identifier = String(describing: PhotoCollectionViewCell.self)
     var locationCoordinate = CLLocationCoordinate2D()
-    var store: PhotoStore!
-    let photoDataSource = PhotoDataSource()
+    let store = PhotoStore()
+    var dataSource = [Photo]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.dataSource = photoDataSource
+        collectionView.dataSource = self
         collectionView.delegate = self
         
         updateDataSource()
@@ -53,23 +54,38 @@ class DetailViewController: UIViewController {
         store.fetchAllPhotos { (photosResult) in
             switch photosResult {
             case let .success(photos):
-                self.photoDataSource.photos = photos
+                self.dataSource = photos
             case .failure:
-                self.photoDataSource.photos.removeAll()
+                self.dataSource.removeAll()
             }
-            self.collectionView.reloadSections(IndexSet(integer: 0))
-        }
+            self.collectionView.reloadData()        }
     }
-
 }
+
+// MARK: - UICollectionViewDataSource
+
+extension DetailViewController: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return dataSource.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! PhotoCollectionViewCell
+        
+        return cell
+    }
+}
+
+// MARK: - UICollectionViewDelegate
 
 extension DetailViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        let photo = photoDataSource.photos[indexPath.row]
+        let photo = dataSource[indexPath.row]
         
         store.fetchImage(for: photo) { (result) -> Void in
-            guard let photoIndex = self.photoDataSource.photos.index(of: photo),
+            guard let photoIndex = self.dataSource.index(of: photo),
                 case let .success(image) = result else {
                     return
             }

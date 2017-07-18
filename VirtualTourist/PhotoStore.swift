@@ -107,8 +107,6 @@ class PhotoStore {
     
     func fetchAllPhotos(completion: @escaping (Result<[Photo]>) -> Void) {
         let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
-        let sortByDateTaken = NSSortDescriptor(key: #keyPath(Photo.dateTaken), ascending: true)
-        fetchRequest.sortDescriptors = [sortByDateTaken]
         
         let viewContext = persistantContainer.viewContext
         viewContext.perform {

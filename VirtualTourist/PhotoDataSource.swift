@@ -20,14 +20,6 @@ class PhotoDataSource: NSObject, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! PhotoCollectionViewCell
         
-        // TODO: adding images for a cell is slow. 
-        // This needs improving. Also no spinner happens whilst the images are being fetched. 
-        // Also force casting to URL
-        let photo = photos[indexPath.row]
-        if let imageData = try? Data(contentsOf: photo.remoteURL! as URL) {
-            cell.imageView.image = UIImage(data: imageData)
-        }
-        
         return cell
     }
 }

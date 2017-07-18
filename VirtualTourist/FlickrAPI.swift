@@ -19,12 +19,6 @@ struct FlickrAPI {
         return flickrURL()
     }
     
-    private static let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        return formatter
-    }()
-    
     static func photos(fromJSON data: Data, into context: NSManagedObjectContext) -> Result<[Photo]> {
         let parsedResult: [String: AnyObject]
         do {
@@ -53,9 +47,7 @@ struct FlickrAPI {
             let title = json[Constants.FlickrResponseKeys.Title] as? String,
             let urlString = json[Constants.FlickrResponseKeys.MediumURL] as? String,
             let url = URL(string: urlString),
-            let photoID = json[Constants.FlickrResponseKeys.PhotoID] as? String,
-            let dateString = json["datetaken"] as? String,
-            let dateTaken = dateFormatter.date(from: dateString) else {
+            let photoID = json[Constants.FlickrResponseKeys.PhotoID] as? String else {
                 return nil
         }
         
@@ -77,7 +69,6 @@ struct FlickrAPI {
             photo.title = title
             photo.photoID = photoID
             photo.remoteURL = url as NSURL
-            photo.dateTaken = dateTaken as NSDate 
         }
         return photo
     }
