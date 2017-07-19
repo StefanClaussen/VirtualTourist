@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 enum FlickrError: Error {
     case invalidJSONData
@@ -18,7 +19,7 @@ struct FlickrAPI {
         return flickrURL()
     }
     
-    static func photos(fromJSON data: Data) -> Result<[Photo]> {
+    static func photos(fromJSON data: Data, into context: NSManagedObjectContext) -> Result<[Photo]> {
         let parsedResult: [String: AnyObject]
         do {
             parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
@@ -33,12 +34,43 @@ struct FlickrAPI {
         
         var finalPhotos = [Photo]()
         for photoDictionary in photosArray {
-            guard let photo = Photo(fromJSON: photoDictionary) else {
+            guard let photo = photo(fromJSON: photoDictionary, into: context) else {
                 return .failure(FlickrError.invalidJSONData)
             }
             finalPhotos.append(photo)
         }
         return .success(finalPhotos)
+    }
+    
+    private static func photo(fromJSON json: [String: Any], into context: NSManagedObjectContext) -> Photo? {
+        guard
+            let title = json[Constants.FlickrResponseKeys.Title] as? String,
+            let urlString = json[Constants.FlickrResponseKeys.MediumURL] as? String,
+            let url = URL(string: urlString),
+            let photoID = json[Constants.FlickrResponseKeys.PhotoID] as? String else {
+                return nil
+        }
+        
+        let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
+        let predicate = NSPredicate(format: "\(#keyPath(Photo.photoID)) == \(photoID)")
+        fetchRequest.predicate = predicate
+        
+        var fetchedPhotos: [Photo]?
+        context.performAndWait {
+            fetchedPhotos = try? fetchRequest.execute()
+        }
+        if let existingPhoto = fetchedPhotos?.first {
+            return existingPhoto
+        }
+        
+        var photo: Photo!
+        context.performAndWait {
+            photo = Photo(context: context)
+            photo.title = title
+            photo.photoID = photoID
+            photo.remoteURL = url as NSURL
+        }
+        return photo
     }
     
     private static func flickrURL() -> URL {
@@ -68,6 +100,7 @@ struct FlickrAPI {
             Constants.FlickrParameterKeys.Extras: Constants.FlickrParameterValues.MediumURL,
             Constants.FlickrParameterKeys.Format: Constants.FlickrParameterValues.ResponseFormat,
             Constants.FlickrParameterKeys.NoJSONCallback: Constants.FlickrParameterValues.DisableJSONCallback,
+            Constants.FlickrParameterKeys.PerPage: Constants.FlickrParameterValues.PerPage
         ]
         
         for (key, value) in parameters {

@@ -37,8 +37,7 @@ struct Constants {
         static let Text = "text"
         static let BoundingBox = "bbox"
         static let Page = "page"
-        static let latitude = "lat"
-        static let longitude = "longitude"
+        static let PerPage = "per_page"
     }
     
     // MARK: Flickr Parameter Values
@@ -51,6 +50,7 @@ struct Constants {
         static let GalleryID = "5704-72157622566655097"
         static let MediumURL = "url_m"
         static let UseSafeSearch = "1"
+        static let PerPage = "21" /* Limit request to 21 photos */
     }
     
     // MARK: Flickr Response Keys
@@ -62,6 +62,7 @@ struct Constants {
         static let MediumURL = "url_m"
         static let Pages = "pages"
         static let Total = "total"
+        static let PhotoID = "id"
     }
     
     // MARK: Flickr Response Values
@@ -69,14 +70,4 @@ struct Constants {
         static let OKStatus = "ok"
     }
     
-    // FIX: As of Swift 2.2, using strings for selectors has been deprecated. Instead, #selector(methodName) should be used.
-    /*
-     // MARK: Selectors
-     struct Selectors {
-     static let KeyboardWillShow: Selector = "keyboardWillShow:"
-     static let KeyboardWillHide: Selector = "keyboardWillHide:"
-     static let KeyboardDidShow: Selector = "keyboardDidShow:"
-     static let KeyboardDidHide: Selector = "keyboardDidHide:"
-     }
-     */
 }
