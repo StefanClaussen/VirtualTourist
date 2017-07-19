@@ -107,12 +107,10 @@
 			isa = PBXGroup;
 			children = (
 				F8A0F3681F17A55800B00121 /* Constants.swift */,
-				F8A0F3661F17A52B00B00121 /* FlickrAPI.swift */,
 				F8CE24701F1D1C2B00153ED0 /* ImageStore.swift */,
 				F8A5CC631F1D0CC300F0A33B /* Photo+CoreDataClass.swift */,
 				F8A552351F1E855500AD61A9 /* Photo+CoreDataProperties.swift */,
 				F8A0F36B1F17ADE400B00121 /* PhotoStore.swift */,
-				F81AB4601F1D083B008E1930 /* VirtualTourist.xcdatamodeld */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -141,11 +139,15 @@
 		F8AE55E01F161FD4005C8295 /* VirtualTourist */ = {
 			isa = PBXGroup;
 			children = (
-				F8AE55E11F161FD4005C8295 /* AppDelegate.swift */,
-				F88366D01F1F649700277247 /* Views */,
+				F8EADF9F1F1F6C2D00CEA613 /* Application Delegate */,
+				F8EADFA21F1F6CBE00CEA613 /* Core Data */,
 				F8A0F36A1F17A56000B00121 /* Models */,
-				F8AE56121F162144005C8295 /* Controllers */,
-				F8AE560F1F162014005C8295 /* Assets */,
+				F8EADFA31F1F6D2A00CEA613 /* Network */,
+				F8EADFA11F1F6CB000CEA613 /* Resources */,
+				F8EADFA01F1F6C8200CEA613 /* Storyboards */,
+				F8AE560F1F162014005C8295 /* Supporting Files */,
+				F8AE56121F162144005C8295 /* View Controllers */,
+				F88366D01F1F649700277247 /* Views */,
 			);
 			path = VirtualTourist;
 			sourceTree = "<group>";
@@ -168,24 +170,21 @@
 			path = VirtualTouristUITests;
 			sourceTree = "<group>";
 		};
-		F8AE560F1F162014005C8295 /* Assets */ = {
+		F8AE560F1F162014005C8295 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				F8AE55E51F161FD4005C8295 /* Main.storyboard */,
-				F8AE55E81F161FD4005C8295 /* Assets.xcassets */,
-				F8AE55EA1F161FD4005C8295 /* LaunchScreen.storyboard */,
 				F8AE55ED1F161FD4005C8295 /* Info.plist */,
 			);
-			name = Assets;
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		F8AE56121F162144005C8295 /* Controllers */ = {
+		F8AE56121F162144005C8295 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				F8AE56101F162128005C8295 /* MapViewController.swift */,
 				F8AE56161F164856005C8295 /* DetailViewController.swift */,
 			);
-			name = Controllers;
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 		F8AE56131F1624D9005C8295 /* Frameworks */ = {
@@ -194,6 +193,47 @@
 				F8AE56141F1624D9005C8295 /* MapKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F8EADF9F1F1F6C2D00CEA613 /* Application Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				F8AE55E11F161FD4005C8295 /* AppDelegate.swift */,
+			);
+			name = "Application Delegate";
+			sourceTree = "<group>";
+		};
+		F8EADFA01F1F6C8200CEA613 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				F8AE55E51F161FD4005C8295 /* Main.storyboard */,
+				F8AE55EA1F161FD4005C8295 /* LaunchScreen.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		F8EADFA11F1F6CB000CEA613 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F8AE55E81F161FD4005C8295 /* Assets.xcassets */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		F8EADFA21F1F6CBE00CEA613 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				F81AB4601F1D083B008E1930 /* VirtualTourist.xcdatamodeld */,
+			);
+			name = "Core Data";
+			sourceTree = "<group>";
+		};
+		F8EADFA31F1F6D2A00CEA613 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				F8A0F3661F17A52B00B00121 /* FlickrAPI.swift */,
+			);
+			name = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
