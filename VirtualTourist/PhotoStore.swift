@@ -87,8 +87,6 @@ class PhotoStore {
     func fetchAllPhotos(completion: @escaping (Result<[Photo]>) -> Void) {
         let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
         
-        // TODO: Add logic so that duplicate photos are removed.
-        
         let viewContext = persistantContainer.viewContext
         viewContext.perform {
             do {
