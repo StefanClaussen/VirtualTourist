@@ -1,8 +1,8 @@
 //
-//  PhotoCollectionViewCell.swift
+//  PhotoCollectionViewCell
 //  VirtualTourist
 //
-//  Created by Stefan Claussen on 14/07/2017.
+//  Created by Stefan Claussen on 13/07/2017.
 //  Copyright © 2017 One foot after the other. All rights reserved.
 //
 
@@ -10,9 +10,9 @@ import UIKit
 
 class PhotoCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var spinner: UIActivityIndicatorView!
-    
+    @IBOutlet var imageView: UIImageView!
+    @IBOutlet var spinner: UIActivityIndicatorView!
+ 
     override func awakeFromNib() {
         super.awakeFromNib()
         

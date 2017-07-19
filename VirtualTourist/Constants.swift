@@ -1,9 +1,9 @@
 //
 //  Constants.swift
-//  FlickFinder
+//  VirtualTourist
 //
-//  Created by Jarrod Parkes on 11/5/15.
-//  Copyright © 2015 Udacity. All rights reserved.
+//  Created by Stefan Claussen on 13/07/2017.
+//  Copyright © 2017 One foot after the other. All rights reserved.
 //
 
 import UIKit

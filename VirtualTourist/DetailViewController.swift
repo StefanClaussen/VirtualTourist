@@ -15,6 +15,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     
     fileprivate let identifier = String(describing: PhotoCollectionViewCell.self)
+    
     var locationCoordinate = CLLocationCoordinate2D()
     let store = PhotoStore()
     var dataSource = [Photo]()
