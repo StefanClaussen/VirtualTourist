@@ -24,12 +24,10 @@ class DetailViewController: UIViewController {
         
         collectionView.dataSource = self
         collectionView.delegate = self
-        
-        updateDataSource()
 
         addMapAnnotation()
         
-        store.GETPhotosFromFlickr { [weak self] (result) in
+        store.fetchPhotos { [weak self] (result) in
             guard let strongSelf = self else { return }
             
             strongSelf.updateDataSource()
@@ -51,14 +49,16 @@ class DetailViewController: UIViewController {
     }
     
     private func updateDataSource() {
-        store.fetchAllPhotos { (photosResult) in
+        store.fetchAllPhotos { [weak self] (photosResult) in
+            guard let strongSelf = self else { return }
             switch photosResult {
             case let .success(photos):
-                self.dataSource = photos
+                strongSelf.dataSource = photos
             case .failure:
-                self.dataSource.removeAll()
+                strongSelf.dataSource.removeAll()
             }
-            self.collectionView.reloadData()        }
+            strongSelf.collectionView.reloadData()
+        }
     }
 }
 
@@ -84,14 +84,16 @@ extension DetailViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let photo = dataSource[indexPath.row]
         
-        store.fetchImage(for: photo) { (result) -> Void in
-            guard let photoIndex = self.dataSource.index(of: photo),
+        store.fetchImage(for: photo) { [weak self] (result) -> Void in
+            guard
+                let strongSelf = self,
+                let photoIndex = strongSelf.dataSource.index(of: photo),
                 case let .success(image) = result else {
                     return
             }
             let photoIndexPath = IndexPath(item: photoIndex, section: 0)
             
-            if let cell = self.collectionView.cellForItem(at: photoIndexPath) as? PhotoCollectionViewCell {
+            if let cell = strongSelf.collectionView.cellForItem(at: photoIndexPath) as? PhotoCollectionViewCell {
                 cell.update(with: image)
             }
         }

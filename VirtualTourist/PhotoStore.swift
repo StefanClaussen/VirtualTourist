@@ -36,21 +36,18 @@ class PhotoStore {
         return container
     }()
     
-    private let session: URLSession = {
-        let config = URLSessionConfiguration.default
-        return URLSession(configuration: config)
-    }()
+    private let session = URLSession.shared
     
-    //Rename to fetchPhotosSearch maybe
-    func GETPhotosFromFlickr(completion: @escaping (Result<[Photo]>) -> Void) {
+    // Makes request to Flickr's flickr.photos.search method
+    func fetchPhotos(completion: @escaping (Result<[Photo]>) -> Void) {
         let request = URLRequest(url: FlickrAPI.searchURL)
         
-        //TODO: add strong and weak self
-        let task = session.dataTask(with: request) { (data, response, error) in
-            var result = self.processPhotosRequest(data: data, error: error)
+        let task = session.dataTask(with: request) { [weak self] (data, response, error) in
+            guard let strongSelf = self else { return }
+            var result = strongSelf.processPhotosRequest(data: data, error: error)
             if case .success = result {
                 do {
-                    try self.persistantContainer.viewContext.save()
+                    try strongSelf.persistantContainer.viewContext.save()
                 } catch let error {
                     result = .failure(error)
                 }
@@ -62,15 +59,7 @@ class PhotoStore {
         task.resume()
     }
     
-    private func processPhotosRequest(data: Data?, error: Error?) -> Result<[Photo]> {
-        guard let jsonData = data else {
-            return .failure(error ?? PhotoStoreError.unknown)
-        }
-        return FlickrAPI.photos(fromJSON: jsonData, into: persistantContainer.viewContext)
-    }
-    
     func fetchImage(for photo: Photo, completion: @escaping (Result<UIImage>) -> Void) {
-        
         guard let photoKey = photo.photoID else {
             preconditionFailure("Photo expected to have a photoID.")
         }
@@ -85,8 +74,9 @@ class PhotoStore {
         }
         let request = URLRequest(url: photoURL as URL)
         
-        let task = session.dataTask(with: request) { (data, response, error) -> Void in
-            let result = self.processImageRequest(data: data, error: error)
+        let task = session.dataTask(with: request) { [weak self] (data, response, error) -> Void in
+            guard let strongSelf = self else { return }
+            let result = strongSelf.processImageRequest(data: data, error: error)
             OperationQueue.main.addOperation {
                 completion(result)
             }
@@ -94,19 +84,10 @@ class PhotoStore {
         task.resume()
     }
     
-    func processImageRequest(data: Data?, error: Error?) -> Result<UIImage> {
-        guard let imageData = data, let image = UIImage(data: imageData) else {
-            if data == nil {
-                return .failure(error ?? PhotoStoreError.unknown)
-            } else {
-                return .failure(PhotoError.imageCreationError)
-            }
-        }
-        return .success(image)
-    }
-    
     func fetchAllPhotos(completion: @escaping (Result<[Photo]>) -> Void) {
         let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
+        
+        // TODO: Add logic so that duplicate photos are removed.
         
         let viewContext = persistantContainer.viewContext
         viewContext.perform {
@@ -117,5 +98,25 @@ class PhotoStore {
                 completion(.failure(error))
             }
         }
+    }
+    
+    // MARK: - Private methods
+    
+    private func processPhotosRequest(data: Data?, error: Error?) -> Result<[Photo]> {
+        guard let jsonData = data else {
+            return .failure(error ?? PhotoStoreError.unknown)
+        }
+        return FlickrAPI.photos(fromJSON: jsonData, into: persistantContainer.viewContext)
+    }
+    
+    private func processImageRequest(data: Data?, error: Error?) -> Result<UIImage> {
+        guard let imageData = data, let image = UIImage(data: imageData) else {
+            if data == nil {
+                return .failure(error ?? PhotoStoreError.unknown)
+            } else {
+                return .failure(PhotoError.imageCreationError)
+            }
+        }
+        return .success(image)
     }
 }
